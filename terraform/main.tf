@@ -4,7 +4,6 @@ terraform {
     azurerm = {
       source  = "hashicorp/azurerm"
       version = "~> 3.0"
-      use_oidc = true
     }
     random = {
       source  = "hashicorp/random"
@@ -21,6 +20,7 @@ terraform {
 provider "azurerm" {
   features {}
   tenant_id = var.tenant_id
+  use_oidc = true
 }
 
 # Resource Group
