@@ -4,6 +4,7 @@ terraform {
     azurerm = {
       source  = "hashicorp/azurerm"
       version = "~> 3.0"
+      use_oidc = true
     }
     random = {
       source  = "hashicorp/random"
