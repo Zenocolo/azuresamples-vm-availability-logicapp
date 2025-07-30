@@ -54,12 +54,6 @@ jobs:
         working-directory: ./terraform
 
     steps:
-    - shell: bash
-      env:
-         ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
-      run: |
-         echo  "$ARM_CLIENT_ID"
-         
     - name: Checkout
       uses: actions/checkout@v4
 
