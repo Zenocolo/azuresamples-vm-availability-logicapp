@@ -31,17 +31,17 @@ az ad sp create --id $APP_ID
 # Get the service principal object ID
 SP_OBJECT_ID=$(az ad sp list --display-name "logic-app-deployment-oidc" --query "[0].id" -o tsv)
 
-# Assign roles to the service principal
+# Assign roles to the service principal (use existing service principal: 68be7fe9-253b-4b83-acfb-f34f3f3a5365)
 az role assignment create \
   --assignee $SP_OBJECT_ID \
   --role "Contributor" \
-  --scope "/subscriptions/YOUR_SUBSCRIPTION_ID"
+  --scope "/subscriptions/e163a9c7-fa9f-4900-a4b7-b7fb3a7a3acb"
 
 # Additional role assignment for managed identity operations
 az role assignment create \
   --assignee $SP_OBJECT_ID \
   --role "User Access Administrator" \
-  --scope "/subscriptions/YOUR_SUBSCRIPTION_ID"
+  --scope "/subscriptions/e163a9c7-fa9f-4900-a4b7-b7fb3a7a3acb"
 
 # Configure federated identity for GitHub Actions
 az ad app federated-credential create \
@@ -68,7 +68,7 @@ az ad app federated-credential create \
 echo "App ID (use as AZURE_CLIENT_ID): $APP_ID"
 ```
 
-**Important**: Replace `YOUR_GITHUB_USERNAME` with your actual GitHub username and `YOUR_SUBSCRIPTION_ID` with your Azure subscription ID.
+**Important**: Replace `YOUR_GITHUB_USERNAME` with your actual GitHub username.
 
 ### 2. Required GitHub Secrets
 
@@ -76,11 +76,11 @@ Configure these secrets in your GitHub repository (Settings → Secrets and vari
 
 | Secret Name | Description | Example |
 |-------------|-------------|---------|
-| `AZURE_CLIENT_ID` | App Registration application ID | `12345678-1234-1234-1234-123456789012` |
-| `AZURE_SUBSCRIPTION_ID` | Target Azure subscription ID | `87654321-4321-4321-4321-210987654321` |
-| `AZURE_TENANT_ID` | Azure tenant ID | `539d8bb1-bbd5-4f9d-836d-223c3e6d1e43` |
-| `AZURE_TARGET_SUBSCRIPTION_ID` | Subscription to monitor for VM alerts | Same as AZURE_SUBSCRIPTION_ID or different |
-| `NOTIFICATION_EMAIL` | Email for alert notifications | `admin@yourcompany.com` |
+| `AZURE_CLIENT_ID` | App Registration application ID (service principal: 68be7fe9-253b-4b83-acfb-f34f3f3a5365) | `68be7fe9-253b-4b83-acfb-f34f3f3a5365` |
+| `AZURE_SUBSCRIPTION_ID` | Target Azure subscription ID | `e163a9c7-fa9f-4900-a4b7-b7fb3a7a3acb` |
+| `AZURE_TENANT_ID` | Azure tenant ID | `588ee698-568f-44c2-841c-e17de920d235` |
+| `AZURE_TARGET_SUBSCRIPTION_ID` | Subscription to monitor for VM alerts | `e163a9c7-fa9f-4900-a4b7-b7fb3a7a3acb` |
+| `NOTIFICATION_EMAIL` | Email for alert notifications | `phzenhae@microsoft.com` |
 | `STATE_STORAGE_ACCOUNT` | Azure Storage account name for Terraform state | `mystorageaccount` |
 | `STATE_CONTAINER` | Azure Storage container name for Terraform state | `tfstate` |
 | `STATE_RESOURCE_GROUP` | Azure Resource Group containing the storage account | `rg-terraform-state` |
@@ -148,10 +148,10 @@ git push origin main
 You can customize the deployment by modifying variables in `terraform/variables.tf` or by setting them in the GitHub workflow.
 
 Key variables:
-- `resource_group_name`: Name of the resource group (default: "rg-vm-availability-logicapp")
-- `location`: Azure region (default: "Sweden Central")
+- `resource_group_name`: Name of the resource group (default: "LogicAppMonitoring")
+- `location`: Azure region (default: "swedencentral")
 - `logic_app_name`: Name of the Logic App (default: "la-vm-availability-monitor")
-- `notification_email`: Email for notifications (set via GitHub secret)
+- `notification_email`: Email for notifications (default: "phzenhae@microsoft.com")
 
 ### Workflow Environment
 

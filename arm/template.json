@@ -121,12 +121,12 @@
                     "description": "Microsoft Office 365 is a cloud-based service that is designed to help meet your organization's needs for robust security, reliability, and user productivity.",
                     "iconUri": "https://conn-afd-prod-endpoint-bmc9bqahasf3grgk.b01.azurefd.net/v1.0.1757/1.0.1757.4253/office365/icon.png",
                     "brandColor": "#0078D4",
-                    "id": "/subscriptions/5f33a090-5b5b-43ff-a6dd-e912e60767ec/providers/Microsoft.Web/locations/swedencentral/managedApis/office365",
+                    "id": "/subscriptions/e163a9c7-fa9f-4900-a4b7-b7fb3a7a3acb/providers/Microsoft.Web/locations/swedencentral/managedApis/office365",
                     "type": "Microsoft.Web/locations/managedApis"
                 },
                 "testLinks": [
                     {
-                        "requestUri": "[concat('https://management.azure.com:443/subscriptions/5f33a090-5b5b-43ff-a6dd-e912e60767ec/resourceGroups/rg-vm-availability-logicapp/providers/Microsoft.Web/connections/', parameters('connections_office365_1_name'), '/extensions/proxy/testconnection?api-version=2016-06-01')]",
+                        "requestUri": "[concat('https://management.azure.com:443/subscriptions/e163a9c7-fa9f-4900-a4b7-b7fb3a7a3acb/resourceGroups/LogicAppMonitoring/providers/Microsoft.Web/connections/', parameters('connections_office365_1_name'), '/extensions/proxy/testconnection?api-version=2016-06-01')]",
                         "method": "get"
                     }
                 ]
@@ -160,12 +160,12 @@
                     "description": "Microsoft Office 365 is a cloud-based service that is designed to help meet your organization's needs for robust security, reliability, and user productivity.",
                     "iconUri": "https://conn-afd-prod-endpoint-bmc9bqahasf3grgk.b01.azurefd.net/v1.0.1757/1.0.1757.4253/office365/icon.png",
                     "brandColor": "#0078D4",
-                    "id": "/subscriptions/5f33a090-5b5b-43ff-a6dd-e912e60767ec/providers/Microsoft.Web/locations/swedencentral/managedApis/office365",
+                    "id": "/subscriptions/e163a9c7-fa9f-4900-a4b7-b7fb3a7a3acb/providers/Microsoft.Web/locations/swedencentral/managedApis/office365",
                     "type": "Microsoft.Web/locations/managedApis"
                 },
                 "testLinks": [
                     {
-                        "requestUri": "[concat('https://management.azure.com:443/subscriptions/5f33a090-5b5b-43ff-a6dd-e912e60767ec/resourceGroups/rg-vm-availability-logicapp/providers/Microsoft.Web/connections/', parameters('connections_office365_connection_name'), '/extensions/proxy/testconnection?api-version=2016-06-01')]",
+                        "requestUri": "[concat('https://management.azure.com:443/subscriptions/e163a9c7-fa9f-4900-a4b7-b7fb3a7a3acb/resourceGroups/LogicAppMonitoring/providers/Microsoft.Web/connections/', parameters('connections_office365_connection_name'), '/extensions/proxy/testconnection?api-version=2016-06-01')]",
                         "method": "get"
                     }
                 ]
@@ -175,7 +175,7 @@
             "type": "Microsoft.Web/serverfarms",
             "apiVersion": "2024-04-01",
             "name": "[parameters('serverfarms_asp_vm_availability_logicapp_name')]",
-            "location": "Sweden Central",
+            "location": "swedencentral",
             "tags": {
                 "Environment": "demo",
                 "ManagedBy": "terraform",
@@ -315,7 +315,7 @@
             "type": "Microsoft.Web/sites",
             "apiVersion": "2024-04-01",
             "name": "[parameters('sites_la_vm_availability_monitor_name')]",
-            "location": "Sweden Central",
+            "location": "swedencentral",
             "dependsOn": [
                 "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarms_asp_vm_availability_logicapp_name'))]"
             ],
@@ -328,7 +328,7 @@
             "identity": {
                 "type": "UserAssigned",
                 "userAssignedIdentities": {
-                    "/subscriptions/5f33a090-5b5b-43ff-a6dd-e912e60767ec/resourcegroups/rg-vm-availability-logicapp/providers/Microsoft.ManagedIdentity/userAssignedIdentities/mi-vm-availability-logicapp": {}
+                    "/subscriptions/e163a9c7-fa9f-4900-a4b7-b7fb3a7a3acb/resourcegroups/LogicAppMonitoring/providers/Microsoft.ManagedIdentity/userAssignedIdentities/mi-vm-availability-logicapp": {}
                 }
             },
             "properties": {
@@ -383,7 +383,7 @@
             "type": "Microsoft.Web/sites/basicPublishingCredentialsPolicies",
             "apiVersion": "2024-04-01",
             "name": "[concat(parameters('sites_la_vm_availability_monitor_name'), '/ftp')]",
-            "location": "Sweden Central",
+            "location": "swedencentral",
             "dependsOn": [
                 "[resourceId('Microsoft.Web/sites', parameters('sites_la_vm_availability_monitor_name'))]"
             ],
@@ -400,7 +400,7 @@
             "type": "Microsoft.Web/sites/basicPublishingCredentialsPolicies",
             "apiVersion": "2024-04-01",
             "name": "[concat(parameters('sites_la_vm_availability_monitor_name'), '/scm')]",
-            "location": "Sweden Central",
+            "location": "swedencentral",
             "dependsOn": [
                 "[resourceId('Microsoft.Web/sites', parameters('sites_la_vm_availability_monitor_name'))]"
             ],
@@ -417,7 +417,7 @@
             "type": "Microsoft.Web/sites/config",
             "apiVersion": "2024-04-01",
             "name": "[concat(parameters('sites_la_vm_availability_monitor_name'), '/web')]",
-            "location": "Sweden Central",
+            "location": "swedencentral",
             "dependsOn": [
                 "[resourceId('Microsoft.Web/sites', parameters('sites_la_vm_availability_monitor_name'))]"
             ],
@@ -505,7 +505,7 @@
             "type": "Microsoft.Web/sites/hostNameBindings",
             "apiVersion": "2024-04-01",
             "name": "[concat(parameters('sites_la_vm_availability_monitor_name'), '/', parameters('sites_la_vm_availability_monitor_name'), '.azurewebsites.net')]",
-            "location": "Sweden Central",
+            "location": "swedencentral",
             "dependsOn": [
                 "[resourceId('Microsoft.Web/sites', parameters('sites_la_vm_availability_monitor_name'))]"
             ],

@@ -2,17 +2,21 @@
 # Copy this file to terraform.tfvars and update the values
 
 # Azure Configuration
-subscription_id = "your-subscription-id-here"
-tenant_id       = "539d8bb1-bbd5-4f9d-836d-223c3e6d1e43"
+subscription_id = "e163a9c7-fa9f-4900-a4b7-b7fb3a7a3acb"
+tenant_id       = "588ee698-568f-44c2-841c-e17de920d235"
+
+# Service Principal for GitHub Actions (reference only - do not commit secrets)
+# Use service principal ID: 68be7fe9-253b-4b83-acfb-f34f3f3a5365
+# Set AZURE_CLIENT_SECRET as environment variable or GitHub secret
 
 # Resource Configuration
-resource_group_name = "rg-vm-availability-logicapp"
-location            = "Sweden Central"
+resource_group_name = "LogicAppMonitoring"
+location            = "swedencentral"
 logic_app_name      = "la-vm-availability-monitor"
 
 # Monitoring Configuration
-target_subscription_id = "your-target-subscription-id-to-monitor"
-notification_email     = "your-email@domain.com"
+target_subscription_id = "e163a9c7-fa9f-4900-a4b7-b7fb3a7a3acb"
+notification_email     = "phzenhae@microsoft.com"
 
 # Optional: Custom naming
 managed_identity_name     = "mi-vm-availability-logicapp"

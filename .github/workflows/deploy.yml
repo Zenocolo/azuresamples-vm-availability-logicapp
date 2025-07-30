@@ -169,7 +169,7 @@ jobs:
           --resource-group "$RESOURCE_GROUP" \
           --name "$LOGIC_APP_NAME" \
           --definition "./terraform/workflows/logicappalert/logicapp.json" \
-          --location "Sweden Central"
+          --location "swedencentral"
 
     - name: Terraform Destroy
       if: github.event_name == 'workflow_dispatch' && github.event.inputs.action == 'destroy'

@@ -1,24 +1,25 @@
 variable "tenant_id" {
   description = "Azure tenant ID"
   type        = string
-  default     = "539d8bb1-bbd5-4f9d-836d-223c3e6d1e43"
+  default     = "588ee698-568f-44c2-841c-e17de920d235"
 }
 
 variable "subscription_id" {
   description = "Azure subscription ID"
   type        = string
+  default     = "e163a9c7-fa9f-4900-a4b7-b7fb3a7a3acb"
 }
 
 variable "resource_group_name" {
   description = "Name of the resource group"
   type        = string
-  default     = "rg-vm-availability-logicapp"
+  default     = "LogicAppMonitoring"
 }
 
 variable "location" {
   description = "Azure region for resources"
   type        = string
-  default     = "Sweden Central"
+  default     = "swedencentral"
 }
 
 variable "logic_app_name" {
@@ -54,11 +55,13 @@ variable "storage_account_name" {
 variable "notification_email" {
   description = "Email address for notifications"
   type        = string
+  default     = "phzenhae@microsoft.com"
 }
 
 variable "target_subscription_id" {
   description = "Subscription ID to monitor for VM availability"
   type        = string
+  default     = "e163a9c7-fa9f-4900-a4b7-b7fb3a7a3acb"
 }
 
 variable "tags" {

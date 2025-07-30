@@ -6,7 +6,7 @@ Use LogicApp as an Alert action and decide whether to send a notification (e.g. 
 
 ## Automated Deployment with GitHub Actions
 
-This repository includes a GitHub Action workflow that automatically deploys the Logic App infrastructure using Terraform to your Azure subscription in tenant `539d8bb1-bbd5-4f9d-836d-223c3e6d1e43`.
+This repository includes a GitHub Action workflow that automatically deploys the Logic App infrastructure using Terraform to your Azure subscription in tenant `588ee698-568f-44c2-841c-e17de920d235`.
 
 ### Prerequisites
 
@@ -15,7 +15,7 @@ This repository includes a GitHub Action workflow that automatically deploys the
    # Create app registration
    az ad app create --display-name "logic-app-deployment-oidc" --sign-in-audience AzureADMyOrg
    
-   # Create service principal and assign roles
+   # Create service principal and assign roles (use existing service principal: 68be7fe9-253b-4b83-acfb-f34f3f3a5365)
    APP_ID=$(az ad app list --display-name "logic-app-deployment-oidc" --query "[0].appId" -o tsv)
    az ad sp create --id $APP_ID
    
@@ -29,11 +29,11 @@ This repository includes a GitHub Action workflow that automatically deploys the
    ```
 
 2. **GitHub Secrets**: Configure the following secrets in your GitHub repository:
-   - `AZURE_CLIENT_ID`: App Registration application ID
-   - `AZURE_SUBSCRIPTION_ID`: Your Azure subscription ID
-   - `AZURE_TENANT_ID`: Azure tenant ID (539d8bb1-bbd5-4f9d-836d-223c3e6d1e43)
-   - `AZURE_TARGET_SUBSCRIPTION_ID`: Subscription ID to monitor for VM availability (can be the same as AZURE_SUBSCRIPTION_ID)
-   - `NOTIFICATION_EMAIL`: Email address for alert notifications
+   - `AZURE_CLIENT_ID`: App Registration application ID (reference service principal: 68be7fe9-253b-4b83-acfb-f34f3f3a5365)
+   - `AZURE_SUBSCRIPTION_ID`: Your Azure subscription ID (e163a9c7-fa9f-4900-a4b7-b7fb3a7a3acb)
+   - `AZURE_TENANT_ID`: Azure tenant ID (588ee698-568f-44c2-841c-e17de920d235)
+   - `AZURE_TARGET_SUBSCRIPTION_ID`: Subscription ID to monitor for VM availability (e163a9c7-fa9f-4900-a4b7-b7fb3a7a3acb)
+   - `NOTIFICATION_EMAIL`: Email address for alert notifications (phzenhae@microsoft.com)
    - `STATE_STORAGE_ACCOUNT`: Azure Storage account name for Terraform state
    - `STATE_CONTAINER`: Azure Storage container name for Terraform state
    - `STATE_RESOURCE_GROUP`: Azure Resource Group containing the storage account
@@ -70,11 +70,11 @@ The Terraform configuration deploys:
 Copy `terraform/terraform.tfvars.example` to `terraform/terraform.tfvars` and customize the values:
 
 ```hcl
-subscription_id        = "your-subscription-id"
-target_subscription_id = "subscription-to-monitor"
-notification_email     = "your-email@domain.com"
-resource_group_name    = "rg-vm-availability-logicapp"
-location              = "Sweden Central"
+subscription_id        = "e163a9c7-fa9f-4900-a4b7-b7fb3a7a3acb"
+target_subscription_id = "e163a9c7-fa9f-4900-a4b7-b7fb3a7a3acb"
+notification_email     = "phzenhae@microsoft.com"
+resource_group_name    = "LogicAppMonitoring"
+location              = "swedencentral"
 ```
 
 ### Workflow Outputs
